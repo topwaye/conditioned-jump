@@ -1,8 +1,4 @@
-# conditioned-jump
-
-=======================================
-CONDITIONED-JUMP OPERATING SYSTEM 1.1.0
-=======================================
+# CONDITIONED-JUMP OPERATING SYSTEM 1.1.0
 
 [FUNCTION OF CONDITIONED-JUMP]
 
