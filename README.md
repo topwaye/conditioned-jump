@@ -134,12 +134,14 @@ M is each memory allocator for relative addresses
         , a<-b
 
 (1) never stop at the 2nd level jmp, for serializing kernel (i.e. no task switch):
+
           -----------       -----------
           | level 1 |       | level 2 |
     -------         ---------         -------->
                      kernel           interrupt
 
 (2) only stop at the 1st level jmp, for parallelizing tasks:
+
           -----------
           | level 1 |
     -------         -------->
@@ -154,6 +156,7 @@ M is each memory allocator for relative addresses
 
 Linux Buddy System has fragments, Conditioned-Jump does NOT have fragments
 
+
  +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+
  |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |
  |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |
@@ -162,6 +165,7 @@ Linux Buddy System has fragments, Conditioned-Jump does NOT have fragments
  |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |
  +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+
      area          area        area(dir)       area          area          area        area(dir)
+     
 
 area = [128K]
 subarea = [2^n] !> [4K, 8K, 16K, 32K, 64K]
