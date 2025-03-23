@@ -156,6 +156,7 @@ M is each memory allocator for relative addresses
 
 Linux Buddy System has fragments, Conditioned-Jump does NOT have fragments
 
+>
  +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+  
  |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |  
  |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |  
@@ -164,7 +165,7 @@ Linux Buddy System has fragments, Conditioned-Jump does NOT have fragments
  |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |  
  +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+  
      area          area        area(dir)       area          area          area        area(dir)  
-
+  
 area = [128K]  
 subarea = [2^n] !> [4K, 8K, 16K, 32K, 64K]  
 struct multiple_page_area  
