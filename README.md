@@ -156,36 +156,34 @@ M is each memory allocator for relative addresses
 
 Linux Buddy System has fragments, Conditioned-Jump does NOT have fragments
 
+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+  
+ |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |  
+ |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |  
+ |-----+-----| |-----------| |--+--+--+--| |-----+-----| |-----------| |-----+-----| |-----+-----|  
+ |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |  
+ |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |  
+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+  
+     area          area        area(dir)       area          area          area        area(dir)  
 
- +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+
- |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |
- |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |
- |-----+-----| |-----------| |--+--+--+--| |-----+-----| |-----------| |-----+-----| |-----+-----|
- |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |
- |     |     | |           | |  |  |  |  | |     |     | |           | |     |     | |  |  |  |  |
- +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+ +-----------+
-     area          area        area(dir)       area          area          area        area(dir)
-     
+area = [128K]  
+subarea = [2^n] !> [4K, 8K, 16K, 32K, 64K]  
+struct multiple_page_area  
+{  
+     unsigned long order;               /* each subarea size = 2^n pages */  
+     unsigned long bitfield;            /* is subarea in use ? 128K/4K+ <= 32, sizeof(unsigned long) = 32 */  
+     unsigned long * subareas;          /* point to first subarea(page) */  
+     struct multiple_page_area * next;  /* point to next struct area */  
+};  
 
-area = [128K]
-subarea = [2^n] !> [4K, 8K, 16K, 32K, 64K]
-struct multiple_page_area
-{
-     unsigned long order;               /* each subarea size = 2^n pages */
-     unsigned long bitfield;            /* is subarea in use ? 128K/4K+ <= 32, sizeof(unsigned long) = 32 */
-     unsigned long * subareas;          /* point to first subarea(page) */
-     struct multiple_page_area * next;  /* point to next struct area */
-};
-
-area = [4K]
-subarea = [2^n] !> [32, 64, 128, 256, 512, 1K, 2K]
-struct single_page_area
-{
-     unsigned long order;               /* each subarea size = 2^n bytes */
-     unsigned long bitfield[4];         /* is subarea in use ? 4K/32+ <= 128, sizeof(unsigned long) = 32 */
-     unsigned long * subareas;          /* point to first subarea(page) */
-     struct single_page_area * next;    /* point to next struct area */
-};
+area = [4K]  
+subarea = [2^n] !> [32, 64, 128, 256, 512, 1K, 2K]  
+struct single_page_area  
+{  
+     unsigned long order;               /* each subarea size = 2^n bytes */  
+     unsigned long bitfield[4];         /* is subarea in use ? 4K/32+ <= 128, sizeof(unsigned long) = 32 */  
+     unsigned long * subareas;          /* point to first subarea(page) */  
+     struct single_page_area * next;    /* point to next struct area */  
+};  
 
 [FILE SYSTEM OF CONDITIONED-JUMP]
 
