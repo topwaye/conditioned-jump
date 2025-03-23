@@ -76,12 +76,14 @@ M is each memory allocator for physical addresses
         , a<-b
 
 (1) never stop at the 2nd level jmp, for serializing kernel (i.e. no task switch):
+
           -----------       -----------
           | level 1 |       | level 2 |
     -------         ---------         -------->
                      kernel           interrupt
 
 (2) only stop at the 1st level jmp, for parallelizing tasks:
+
           -----------
           | level 1 |
     -------         -------->
