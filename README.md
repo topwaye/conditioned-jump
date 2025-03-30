@@ -176,6 +176,13 @@ struct single_page_area
      struct single_page_area * next;    /* point to next struct area */  
 };  
 
+[DISPLAY OF CONDITIONED-JUMP]
+
+                                 device1
+                                    |
+                               -->  |
+                                    |
+
 [KEYBOARD OF CONDITIONED-JUMP]
 
              buffer1
