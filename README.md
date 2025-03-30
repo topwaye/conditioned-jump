@@ -178,7 +178,7 @@ struct single_page_area
 
 [KEYBOARD OF CONDITIONED-JUMP]
 
-         buffer1
+           buffer1
               |
          -->  |
               |
